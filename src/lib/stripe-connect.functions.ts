@@ -18,7 +18,12 @@ function getOrigin(): string {
   }
   const proto = getRequestHeader("x-forwarded-proto") ?? "https";
   const host = getRequestHeader("host") ?? getRequestHeader("x-forwarded-host");
-  return host ? `${proto}://${host}` : "https://lovable.app";
+  if (host) return `${proto}://${host}`;
+  const fallback = process.env.PUBLIC_APP_URL ?? "https://meu-contrato-na-mao.lovable.app";
+  if (!process.env.PUBLIC_APP_URL) {
+    console.warn("[stripe-connect] Nenhum header de origem disponível e PUBLIC_APP_URL não está definida. Usando fallback:", fallback);
+  }
+  return fallback;
 }
 
 /**

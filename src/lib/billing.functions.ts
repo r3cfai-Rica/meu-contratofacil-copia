@@ -12,11 +12,18 @@ import {
 } from "./stripe-env.server";
 
 function getOrigin(): string {
-  return (
-    getRequestHeader("origin") ??
-    getRequestHeader("referer")?.replace(/\/[^/]*$/, "") ??
-    "http://localhost:3000"
-  );
+  const origin = getRequestHeader("origin");
+  if (origin) return origin;
+  const referer = getRequestHeader("referer")?.replace(/\/[^/]*$/, "");
+  if (referer) return referer;
+  const proto = getRequestHeader("x-forwarded-proto") ?? "https";
+  const host = getRequestHeader("host") ?? getRequestHeader("x-forwarded-host");
+  if (host) return `${proto}://${host}`;
+  const fallback = process.env.PUBLIC_APP_URL ?? "https://meu-contrato-na-mao.lovable.app";
+  if (!process.env.PUBLIC_APP_URL) {
+    console.warn("[billing] Nenhum header de origem disponível e PUBLIC_APP_URL não está definida. Usando fallback:", fallback);
+  }
+  return fallback;
 }
 
 async function findOrCreateCustomerByEmail(stripe: Stripe, email: string, name?: string) {

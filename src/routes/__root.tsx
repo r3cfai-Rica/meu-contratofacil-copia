@@ -42,8 +42,6 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Aprova ai" },
       { name: "twitter:description", content: "Contratos, cobranças e clientes em um só lugar." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3373182-d88d-46fb-9134-726ba14fa091/id-preview-3a79b7d3--a1120060-9d17-4448-8ade-6bfc3d442970.lovable.app-1778263195074.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3373182-d88d-46fb-9134-726ba14fa091/id-preview-3a79b7d3--a1120060-9d17-4448-8ade-6bfc3d442970.lovable.app-1778263195074.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
