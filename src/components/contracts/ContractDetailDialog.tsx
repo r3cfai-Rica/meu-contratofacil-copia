@@ -343,7 +343,7 @@ export function ContractDetailDialog({ contract, onOpenChange, onChanged }: Prop
                   >
                     <span>{describeAction(h)}</span>
                     <span className="shrink-0 text-xs text-muted-foreground">
-                      {new Date(h.created_at).toLocaleString()}
+                      {new Date(h.created_at).toLocaleString(i18n.language)}
                     </span>
                   </div>
                 ))

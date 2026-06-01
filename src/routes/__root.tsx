@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { preconnect } from "react-dom";
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -46,8 +47,6 @@ export const Route = createRootRoute({
       { name: "twitter:description", content: "Contratos, cobranças e clientes em um só lugar." },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
@@ -64,8 +63,8 @@ export const Route = createRootRoute({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
-  // Reset i18n to default on every server render — the singleton state
-  // can leak across requests in the Worker isolate and cause hydration mismatches.
+  preconnect("https://fonts.googleapis.com");
+  preconnect("https://fonts.gstatic.com", { crossOrigin: "anonymous" });
   resetServerLanguage();
   return (
     <html lang="pt-BR" suppressHydrationWarning>

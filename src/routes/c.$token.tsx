@@ -575,7 +575,7 @@ function SignedConfirmation({
           <Field label={t("publicContract.signerCpf")} value={contract.signer_document ?? "—"} />
           <Field
             label={t("publicContract.dateTime")}
-            value={contract.signed_at ? new Date(contract.signed_at).toLocaleString() : "—"}
+            value={contract.signed_at ? new Date(contract.signed_at).toLocaleString(i18n.language) : "—"}
           />
           <Field label={t("publicContract.originIp")} value={contract.signer_ip ?? "—"} />
           <Field label={t("publicContract.providerLabel")} value={providerName || "—"} />
