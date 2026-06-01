@@ -42,7 +42,7 @@ import { formatDateBR } from "@/lib/format";
 export const Route = createFileRoute("/clientes")({
   head: () => ({
     meta: [
-      { title: "Clientes — ContratoFácil" },
+      { title: "Clientes — Aprova ai" },
       { name: "description", content: "Gerencie seus clientes." },
     ],
   }),

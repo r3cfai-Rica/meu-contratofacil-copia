@@ -43,7 +43,7 @@ import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin — ContratoFácil" },
+      { title: "Admin — Aprova ai" },
       { name: "description", content: "Painel administrativo." },
       { name: "robots", content: "noindex, nofollow" },
     ],

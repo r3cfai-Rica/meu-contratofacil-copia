@@ -24,7 +24,7 @@ export const Route = createFileRoute("/signup")({
   }),
   head: () => ({
     meta: [
-      { title: "Criar conta — ContratoFácil" },
+      { title: "Criar conta — Aprova ai" },
       { name: "description", content: "Crie sua conta grátis no ContratoFácil." },
     ],
   }),

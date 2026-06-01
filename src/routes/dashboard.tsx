@@ -23,8 +23,8 @@ import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — ContratoFácil" },
-      { name: "description", content: "Painel de controle do ContratoFácil." },
+      { title: "Dashboard — Aprova ai" },
+      { name: "description", content: "Painel de controle do Aprova ai." },
     ],
   }),
   component: DashboardRoute,

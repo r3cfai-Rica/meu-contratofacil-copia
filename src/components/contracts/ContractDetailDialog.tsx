@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
-import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
+import { formatMoney, formatDateBR } from "@/lib/format";
 import { buildContractSignUrl } from "@/lib/publicUrls";
 import { generateContractPdf } from "@/lib/contractPdf";
 import { useAuth } from "@/contexts/AuthContext";
@@ -36,6 +36,7 @@ interface ContractRow {
   clauses: string | null;
   status: ContractStatus;
   public_token: string | null;
+  currency?: string | null;
   client_id: string;
   clients?: { full_name: string } | null;
 }
@@ -230,7 +231,7 @@ export function ContractDetailDialog({ contract, onOpenChange, onChanged }: Prop
             <Field label={t("contracts.detail.service")} value={contract.service_type} />
             <Field
               label={t("contracts.detail.amount")}
-              value={formatCurrencyBRL(Number(contract.total_value))}
+              value={formatMoney(Number(contract.total_value), contract.currency)}
             />
             <Field
               label={t("contracts.detail.payment")}

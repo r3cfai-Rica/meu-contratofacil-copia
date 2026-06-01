@@ -17,7 +17,7 @@ export const Route = createFileRoute("/login")({
   }),
   head: () => ({
     meta: [
-      { title: "Entrar — ContratoFácil" },
+      { title: "Entrar — Aprova ai" },
       { name: "description", content: "Acesse sua conta ContratoFácil." },
     ],
   }),

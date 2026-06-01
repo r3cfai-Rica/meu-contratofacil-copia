@@ -12,7 +12,7 @@ import { acceptInvite } from "@/lib/team.functions";
 export const Route = createFileRoute("/aceitar-convite/$token")({
   head: () => ({
     meta: [
-      { title: "Accept invite — EasyContract" },
+      { title: "Accept invite — Aprova ai" },
       { name: "robots", content: "noindex" },
     ],
   }),

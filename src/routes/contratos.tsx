@@ -34,7 +34,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
 
 export const Route = createFileRoute("/contratos")({
-  head: () => ({ meta: [{ title: "Contratos — ContratoFácil" }] }),
+  head: () => ({ meta: [{ title: "Contratos — Aprova ai" }] }),
   component: ContractsRoute,
 });
 

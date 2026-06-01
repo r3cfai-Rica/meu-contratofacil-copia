@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
   }),
   head: () => ({
     meta: [
-      { title: "ContratoFácil — Contratos, cobranças e clientes em um só lugar" },
+      { title: "Aprova ai — Contratos, cobranças e clientes em um só lugar" },
       {
         name: "description",
         content:
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "ContratoFácil — Contratos, cobranças e clientes em um só lugar",
+        content: "Aprova ai — Contratos, cobranças e clientes em um só lugar",
       },
       {
         property: "og:description",

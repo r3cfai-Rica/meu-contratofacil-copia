@@ -59,7 +59,7 @@ import { CheckCircle2, AlertTriangle, KeyRound, Globe } from "lucide-react";
 type KeyType = "cpf" | "cnpj" | "email" | "phone" | "random";
 
 export const Route = createFileRoute("/configuracoes")({
-  head: () => ({ meta: [{ title: "Configurações — ContratoFácil" }] }),
+  head: () => ({ meta: [{ title: "Configurações — Aprova ai" }] }),
   component: SettingsRoute,
 });
 

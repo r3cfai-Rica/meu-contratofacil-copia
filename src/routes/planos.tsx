@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/planos")({
   head: () => ({
     meta: [
-      { title: "Planos — ContratoFácil" },
+      { title: "Planos — Aprova ai" },
       {
         name: "description",
         content:

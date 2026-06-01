@@ -31,7 +31,7 @@ export const Route = createFileRoute("/pagar/$token")({
   }),
   head: () => ({
     meta: [
-      { title: "Pay invoice — EasyContract" },
+      { title: "Pay invoice — Aprova ai" },
       { name: "robots", content: "noindex" },
     ],
   }),

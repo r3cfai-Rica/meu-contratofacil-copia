@@ -44,7 +44,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { formatMoney, formatDateBR } from "@/lib/format";
 
 export const Route = createFileRoute("/cobrancas")({
-  head: () => ({ meta: [{ title: "Cobranças — ContratoFácil" }] }),
+  head: () => ({ meta: [{ title: "Cobranças — Aprova ai" }] }),
   component: InvoicesRoute,
 });
 

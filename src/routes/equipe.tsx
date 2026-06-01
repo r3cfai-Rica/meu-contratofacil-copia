@@ -25,7 +25,7 @@ import { inviteTeamMember } from "@/lib/team.functions";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 
 export const Route = createFileRoute("/equipe")({
-  head: () => ({ meta: [{ title: "Equipe — ContratoFácil" }] }),
+  head: () => ({ meta: [{ title: "Equipe — Aprova ai" }] }),
   component: TeamRoute,
 });
 

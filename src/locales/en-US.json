@@ -777,6 +777,15 @@
       "recurring": "Recurring"
     }
   },
+  "notFound": {
+    "heading": "Page not found",
+    "message": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go home"
+  },
+  "signaturePad": {
+    "placeholder": "Sign here with your finger or mouse",
+    "clear": "Clear"
+  },
   "publicInvoice": {
     "loading": "Loading invoice...",
     "notFound": "Invoice not found",

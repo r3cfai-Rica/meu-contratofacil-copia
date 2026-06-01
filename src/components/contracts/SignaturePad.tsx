@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useImperativeHandle, forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Eraser } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -10,6 +11,7 @@ export interface SignaturePadHandle {
 
 export const SignaturePad = forwardRef<SignaturePadHandle, { className?: string }>(
   function SignaturePad({ className }, ref) {
+    const { t } = useTranslation();
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const drawingRef = useRef(false);
     const lastRef = useRef<{ x: number; y: number } | null>(null);
@@ -110,7 +112,7 @@ export const SignaturePad = forwardRef<SignaturePadHandle, { className?: string 
           {empty && (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
               <span className="select-none text-sm text-slate-400">
-                Assine aqui com o dedo ou mouse
+                {t("signaturePad.placeholder")}
               </span>
             </div>
           )}
@@ -123,7 +125,7 @@ export const SignaturePad = forwardRef<SignaturePadHandle, { className?: string 
             onClick={clear}
             className="gap-1.5 text-xs"
           >
-            <Eraser className="h-3.5 w-3.5" /> Limpar
+            <Eraser className="h-3.5 w-3.5" /> {t("signaturePad.clear")}
           </Button>
         </div>
       </div>

@@ -777,6 +777,15 @@
       "recurring": "Recorrente"
     }
   },
+  "notFound": {
+    "heading": "Página não encontrada",
+    "message": "A página que você está procurando não existe ou foi movida.",
+    "goHome": "Voltar para o início"
+  },
+  "signaturePad": {
+    "placeholder": "Assine aqui com o dedo ou mouse",
+    "clear": "Limpar"
+  },
   "publicInvoice": {
     "loading": "Carregando cobrança...",
     "notFound": "Cobrança não encontrada",
