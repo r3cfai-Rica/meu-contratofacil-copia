@@ -16,11 +16,29 @@ const LANGS = [
 
 export function LanguageSwitcher({ className }: { className?: string }) {
   const { i18n } = useTranslation();
+  const [mounted, setMounted] = useState(false);
   const [language, setLanguage] = useState(DEFAULT_LANGUAGE);
 
   useEffect(() => {
+    setMounted(true);
     setLanguage(normalizeLanguage(i18n.resolvedLanguage ?? i18n.language));
-  }, [i18n.language, i18n.resolvedLanguage]);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      setLanguage(normalizeLanguage(i18n.resolvedLanguage ?? i18n.language));
+    }
+  }, [i18n.language, i18n.resolvedLanguage, mounted]);
+
+  if (!mounted) {
+    return (
+      <div
+        className={className}
+        style={{ display: "inline-flex", height: "2rem", width: "3.5rem" }}
+        aria-hidden="true"
+      />
+    );
+  }
 
   const current =
     LANGS.find((l) => l.code === language) ??

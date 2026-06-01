@@ -263,7 +263,7 @@ function LandingPage() {
 
       <footer className="border-t border-border/60 py-8">
         <div className="mx-auto max-w-6xl px-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} {t("common.brandPrefix")}{t("common.brandSuffix")}. {t("landing.footer")}
+          © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {t("common.brandPrefix")}{t("common.brandSuffix")}. {t("landing.footer")}
         </div>
       </footer>
     </div>

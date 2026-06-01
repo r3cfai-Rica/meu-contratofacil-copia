@@ -1,0 +1,1 @@
+- [TanStack Start SSR useId hydration fix](tanstack-ssr-useid.md) — Radix UI useId differs server/client due to StrictMode+StartClient+Await depth offset; fix with mounted guard.

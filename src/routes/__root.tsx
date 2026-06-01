@@ -68,11 +68,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
   // can leak across requests in the Worker isolate and cause hydration mismatches.
   resetServerLanguage();
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>
