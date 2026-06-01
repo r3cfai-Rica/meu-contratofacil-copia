@@ -31,9 +31,33 @@ const noHeadContentDev: Plugin = {
   },
 };
 
+/**
+ * @tanstack/router-core's development.js exports `void 0` for isServer, which causes
+ * Match.js components (MatchImpl, MatchInner, OnRendered, Outlet) to skip hooks during
+ * SSR but call them on the client. React 19 enforces equal hook counts on both sides,
+ * so this difference triggers "Invalid hook call" during hydration.
+ * Fix: always export false so hooks are called consistently on both server and client.
+ */
+const patchIsServer: Plugin = {
+  name: "patch-is-server",
+  enforce: "pre",
+  transform(code, id) {
+    if (
+      id.includes("@tanstack") &&
+      id.includes("development.js") &&
+      code.includes("void 0")
+    ) {
+      return {
+        code: code.replace(/export default void 0/g, "export default false"),
+        map: null,
+      };
+    }
+  },
+};
+
 export default defineConfig({
   vite: {
-    plugins: [noHeadContentDev],
+    plugins: [noHeadContentDev, patchIsServer],
     server: {
       host: "0.0.0.0",
       port: 5000,
