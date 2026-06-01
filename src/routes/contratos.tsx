@@ -31,7 +31,7 @@ import { UpgradeDialog } from "@/components/billing/UpgradeDialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePlan } from "@/hooks/use-plan";
 import { supabase } from "@/integrations/supabase/client";
-import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
+import { formatMoney, formatDateBR } from "@/lib/format";
 
 export const Route = createFileRoute("/contratos")({
   head: () => ({ meta: [{ title: "Contratos — Aprova ai" }] }),
@@ -59,6 +59,7 @@ interface Contract {
   clauses: string | null;
   status: ContractStatus;
   public_token: string | null;
+  currency?: string | null;
   client_id: string;
   clients: { full_name: string } | null;
 }
@@ -92,7 +93,7 @@ function ContractsPage() {
     const { data, error } = await supabase
       .from("contracts")
       .select(
-        "id, contract_number, title, service_type, service_description, total_value, payment_method, start_date, end_date, clauses, status, public_token, client_id, clients(full_name)",
+        "id, contract_number, title, service_type, service_description, total_value, payment_method, start_date, end_date, clauses, status, public_token, currency, client_id, clients(full_name)",
       )
       .eq("user_id", user.id)
       .order("created_at", { ascending: false });
@@ -216,7 +217,7 @@ function ContractsPage() {
                   <TableCell className="text-muted-foreground">
                     {c.service_type}
                   </TableCell>
-                  <TableCell>{formatCurrencyBRL(Number(c.total_value))}</TableCell>
+                  <TableCell>{formatMoney(Number(c.total_value), c.currency)}</TableCell>
                   <TableCell className="text-muted-foreground">
                     {formatDateBR(c.start_date)}
                   </TableCell>

@@ -18,7 +18,7 @@ import {
 } from "@/components/contracts/ContractStatusBadge";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
+import { formatMoney, formatDateBR } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -42,6 +42,7 @@ interface Stats {
   clients: number;
   activeContracts: number;
   pendingAmount: number;
+  pendingCurrency?: string | null;
   awaitingSignature: number;
 }
 
@@ -53,6 +54,7 @@ interface ContractRow {
   start_date: string;
   status: ContractStatus;
   signed_at: string | null;
+  currency?: string | null;
   clients: { full_name: string } | null;
 }
 
@@ -63,6 +65,7 @@ function DashboardPage() {
     clients: 0,
     activeContracts: 0,
     pendingAmount: 0,
+    pendingCurrency: undefined,
     awaitingSignature: 0,
   });
   const [recent, setRecent] = useState<ContractRow[]>([]);
@@ -80,7 +83,7 @@ function DashboardPage() {
         supabase
           .from("contracts")
           .select(
-            "id, contract_number, title, total_value, start_date, status, signed_at, clients(full_name)",
+            "id, contract_number, title, total_value, start_date, status, signed_at, currency, clients(full_name)",
           )
           .eq("user_id", user.id)
           .order("created_at", { ascending: false }),
@@ -106,6 +109,7 @@ function DashboardPage() {
         clients: clientsRes.count ?? 0,
         activeContracts: active.length,
         pendingAmount: pending,
+        pendingCurrency: active[0]?.currency,
         awaitingSignature: awaiting.length,
       });
       setRecent(all.slice(0, 5));
@@ -122,7 +126,7 @@ function DashboardPage() {
     },
     {
       label: t("dashboard.stats.pending"),
-      value: formatCurrencyBRL(stats.pendingAmount),
+      value: formatMoney(stats.pendingAmount, stats.pendingCurrency),
       icon: Wallet,
     },
     {
@@ -231,7 +235,7 @@ function DashboardPage() {
                     <div className="truncate text-sm font-medium">{c.title}</div>
                     <div className="truncate text-xs text-muted-foreground">
                       {c.clients?.full_name ?? "—"} ·{" "}
-                      {formatCurrencyBRL(Number(c.total_value))}
+                      {formatMoney(Number(c.total_value), c.currency)}
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
