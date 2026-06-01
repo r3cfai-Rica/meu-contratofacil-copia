@@ -61,6 +61,8 @@ export default defineConfig({
         "@tanstack/history",
         "seroval",
         "h3-v2",
+        "use-sync-external-store/shim/with-selector",
+        "use-sync-external-store/shim",
       ],
     },
   },
