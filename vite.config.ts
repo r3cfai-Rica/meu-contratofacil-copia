@@ -17,5 +17,11 @@ export default defineConfig({
         "Cache-Control": "no-store",
       },
     },
+    preview: {
+      host: "0.0.0.0",
+      port: 5000,
+      strictPort: true,
+      allowedHosts: true,
+    },
   },
 });
