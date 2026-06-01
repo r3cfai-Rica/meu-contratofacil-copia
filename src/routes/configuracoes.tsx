@@ -53,7 +53,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { PLAN_ORDER, PLANS, type PlanTier } from "@/lib/plans";
-import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
+import { formatCurrencyBRL, formatDateByLang } from "@/lib/format";
 import { CheckCircle2, AlertTriangle, KeyRound, Globe } from "lucide-react";
 
 type KeyType = "cpf" | "cnpj" | "email" | "phone" | "random";
@@ -84,7 +84,7 @@ interface InvoiceItem {
 }
 
 function SettingsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const { planInfo, currentPeriodEnd, cancelAtPeriodEnd, refresh } = usePlan();
   const { isAdmin } = useIsAdmin();
@@ -702,7 +702,7 @@ function SettingsPage() {
             {currentPeriodEnd && (
               <p className="mt-1 text-xs text-muted-foreground">
                 {cancelAtPeriodEnd ? t("settings.accessUntil") : t("settings.nextRenewal")}{" "}
-                {formatDateBR(currentPeriodEnd)}
+                {formatDateByLang(currentPeriodEnd, i18n.language)}
               </p>
             )}
           </div>
@@ -746,7 +746,7 @@ function SettingsPage() {
                           {t("settings.cancelDialogDesc", {
                             plan: planTierName(planInfo.id),
                             period: currentPeriodEnd
-                              ? t("settings.untilDate", { date: formatDateBR(currentPeriodEnd) })
+                              ? t("settings.untilDate", { date: formatDateByLang(currentPeriodEnd, i18n.language) })
                               : t("settings.untilEndOfPeriod"),
                           })}
                         </AlertDialogDescription>
@@ -793,7 +793,7 @@ function SettingsPage() {
                     <tr key={inv.id} className="border-t border-border/40">
                       <td className="px-3 py-2 font-mono text-xs">{inv.number ?? "—"}</td>
                       <td className="px-3 py-2 text-muted-foreground">
-                        {formatDateBR(new Date(inv.created * 1000).toISOString())}
+                        {formatDateByLang(new Date(inv.created * 1000).toISOString(), i18n.language)}
                       </td>
                       <td className="px-3 py-2">
                         {formatCurrencyBRL((inv.amount_paid || inv.amount_due) / 100)}

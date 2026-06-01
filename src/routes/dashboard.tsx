@@ -18,7 +18,7 @@ import {
 } from "@/components/contracts/ContractStatusBadge";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { formatMoney, formatDateBR } from "@/lib/format";
+import { formatMoney, formatDateByLang, formatDateTimeByLang } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -60,7 +60,7 @@ interface ContractRow {
 
 function DashboardPage() {
   const { user } = useAuth();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [stats, setStats] = useState<Stats>({
     clients: 0,
     activeContracts: 0,
@@ -175,7 +175,7 @@ function DashboardPage() {
                     </span>
                     <span className="shrink-0 text-xs opacity-70">
                       {c.signed_at
-                        ? new Date(c.signed_at).toLocaleString("pt-BR")
+                        ? formatDateTimeByLang(c.signed_at, i18n.language)
                         : ""}
                     </span>
                   </li>
@@ -241,7 +241,7 @@ function DashboardPage() {
                   <div className="flex items-center gap-3">
                     <ContractStatusBadge status={c.status} />
                     <span className="hidden text-xs text-muted-foreground sm:inline">
-                      {formatDateBR(c.start_date)}
+                      {formatDateByLang(c.start_date, i18n.language)}
                     </span>
                   </div>
                 </li>

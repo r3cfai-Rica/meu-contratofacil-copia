@@ -31,7 +31,7 @@ import { UpgradeDialog } from "@/components/billing/UpgradeDialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePlan } from "@/hooks/use-plan";
 import { supabase } from "@/integrations/supabase/client";
-import { formatMoney, formatDateBR } from "@/lib/format";
+import { formatMoney, formatDateByLang } from "@/lib/format";
 
 export const Route = createFileRoute("/contratos")({
   head: () => ({ meta: [{ title: "Contratos — Aprova ai" }] }),
@@ -67,7 +67,7 @@ interface Contract {
 function ContractsPage() {
   const { user } = useAuth();
   const { planInfo, loading: planLoading } = usePlan();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [contracts, setContracts] = useState<Contract[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -219,7 +219,7 @@ function ContractsPage() {
                   </TableCell>
                   <TableCell>{formatMoney(Number(c.total_value), c.currency)}</TableCell>
                   <TableCell className="text-muted-foreground">
-                    {formatDateBR(c.start_date)}
+                    {formatDateByLang(c.start_date, i18n.language)}
                   </TableCell>
                   <TableCell>
                     <ContractStatusBadge status={c.status} />

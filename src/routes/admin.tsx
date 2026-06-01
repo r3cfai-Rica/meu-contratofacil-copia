@@ -38,7 +38,8 @@ import {
 } from "@/components/ui/table";
 import { supabase } from "@/integrations/supabase/client";
 import { useIsAdmin } from "@/hooks/use-is-admin";
-import { formatCurrencyBRL, formatDateBR } from "@/lib/format";
+import { useTranslation } from "react-i18next";
+import { formatCurrencyBRL, formatDateByLang, formatDateTimeByLang } from "@/lib/format";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -129,6 +130,7 @@ interface AdminClientRow {
 }
 
 function AdminPage() {
+  const { i18n } = useTranslation();
   const { isAdmin, loading: roleLoading } = useIsAdmin();
   const navigate = useNavigate();
   const [overview, setOverview] = useState<AdminOverview | null>(null);
@@ -368,12 +370,12 @@ function AdminPage() {
                                   <Badge className={planColor(u.plan)}>{u.plan.toUpperCase()}</Badge>
                                 </TableCell>
                                 <TableCell className="text-sm capitalize">{u.subscription_status}</TableCell>
-                                <TableCell className="text-sm">{formatDateBR(u.signed_up_at)}</TableCell>
+                                <TableCell className="text-sm">{formatDateByLang(u.signed_up_at, i18n.language)}</TableCell>
                                 <TableCell className="text-right">{u.contracts_count}</TableCell>
                                 <TableCell className="text-right">{u.clients_count}</TableCell>
                                 <TableCell className="text-right">{u.invoices_count}</TableCell>
                                 <TableCell className="text-sm">
-                                  {u.current_period_end ? formatDateBR(u.current_period_end) : "—"}
+                                  {u.current_period_end ? formatDateByLang(u.current_period_end, i18n.language) : "—"}
                                 </TableCell>
                               </TableRow>
                             ))
@@ -476,7 +478,7 @@ function AdminPage() {
                                 <TableCell className="text-right font-medium">
                                   {formatCurrencyBRL((c.total_paid_cents ?? 0) / 100)}
                                 </TableCell>
-                                <TableCell className="text-sm">{formatDateBR(c.created_at)}</TableCell>
+                                <TableCell className="text-sm">{formatDateByLang(c.created_at, i18n.language)}</TableCell>
                               </TableRow>
                             ))
                           )}
@@ -517,7 +519,7 @@ function AdminPage() {
                             payments.map((p) => (
                               <TableRow key={p.invoice_id}>
                                 <TableCell className="text-sm">
-                                  {p.paid_at ? formatDateBR(p.paid_at) : "—"}
+                                  {p.paid_at ? formatDateByLang(p.paid_at, i18n.language) : "—"}
                                 </TableCell>
                                 <TableCell className="text-sm">{p.user_email}</TableCell>
                                 <TableCell className="text-sm">{p.client_name || "—"}</TableCell>
@@ -568,7 +570,7 @@ function AdminPage() {
                             audit.map((a) => (
                               <TableRow key={a.id}>
                                 <TableCell className="text-xs text-muted-foreground">
-                                  {new Date(a.created_at).toLocaleString("pt-BR")}
+                                  {formatDateTimeByLang(a.created_at, i18n.language)}
                                 </TableCell>
                                 <TableCell>
                                   <Badge variant={eventVariant(a.event_type)}>{a.event_type}</Badge>

@@ -96,3 +96,9 @@ export function formatDateByLang(value: string | Date, lang: string | undefined 
   const l = normalizeLang(lang);
   return d.toLocaleDateString(l);
 }
+
+export function formatDateTimeByLang(value: string | Date, lang: string | undefined | null): string {
+  const d = typeof value === "string" ? new Date(value) : value;
+  const l = normalizeLang(lang);
+  return d.toLocaleString(l);
+}

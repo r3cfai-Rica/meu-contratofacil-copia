@@ -41,7 +41,7 @@ import { UpgradeDialog } from "@/components/billing/UpgradeDialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePlan } from "@/hooks/use-plan";
 import { supabase } from "@/integrations/supabase/client";
-import { formatMoney, formatDateBR } from "@/lib/format";
+import { formatMoney, formatDateByLang } from "@/lib/format";
 
 export const Route = createFileRoute("/cobrancas")({
   head: () => ({ meta: [{ title: "Cobranças — Aprova ai" }] }),
@@ -343,7 +343,7 @@ function InvoicesPage() {
                   </TableCell>
                   <TableCell>{formatMoney(Number(i.amount), i.currency ?? defaultCurrency)}</TableCell>
                   <TableCell className="text-muted-foreground">
-                    {formatDateBR(i.due_date)}
+                    {formatDateByLang(i.due_date, i18n.language)}
                   </TableCell>
                   <TableCell>
                     <InvoiceStatusBadge status={i.effective} />

@@ -37,7 +37,7 @@ import { UpgradeDialog } from "@/components/billing/UpgradeDialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePlan } from "@/hooks/use-plan";
 import { supabase } from "@/integrations/supabase/client";
-import { formatDateBR } from "@/lib/format";
+import { formatDateByLang } from "@/lib/format";
 
 export const Route = createFileRoute("/clientes")({
   head: () => ({
@@ -70,7 +70,7 @@ interface Client {
 function ClientsPage() {
   const { user } = useAuth();
   const { planInfo, loading: planLoading } = usePlan();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -215,7 +215,7 @@ function ClientsPage() {
                   <TableCell className="text-muted-foreground">{c.phone ?? "—"}</TableCell>
                   <TableCell className="text-muted-foreground">{c.document ?? "—"}</TableCell>
                   <TableCell className="text-muted-foreground">
-                    {formatDateBR(c.created_at)}
+                    {formatDateByLang(c.created_at, i18n.language)}
                   </TableCell>
                   <TableCell>
                     <Badge variant={c.status === "active" ? "default" : "secondary"}>

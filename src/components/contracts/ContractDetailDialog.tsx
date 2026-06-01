@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
-import { formatMoney, formatDateBR } from "@/lib/format";
+import { formatMoney, formatDateByLang } from "@/lib/format";
 import { buildContractSignUrl } from "@/lib/publicUrls";
 import { generateContractPdf } from "@/lib/contractPdf";
 import { useAuth } from "@/contexts/AuthContext";
@@ -237,9 +237,9 @@ export function ContractDetailDialog({ contract, onOpenChange, onChanged }: Prop
               label={t("contracts.detail.payment")}
               value={paymentLabel(contract.payment_method)}
             />
-            <Field label={t("contracts.detail.start")} value={formatDateBR(contract.start_date)} />
+            <Field label={t("contracts.detail.start")} value={formatDateByLang(contract.start_date, i18n.language)} />
             {contract.end_date && (
-              <Field label={t("contracts.detail.end")} value={formatDateBR(contract.end_date)} />
+              <Field label={t("contracts.detail.end")} value={formatDateByLang(contract.end_date, i18n.language)} />
             )}
           </div>
 
