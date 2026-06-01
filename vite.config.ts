@@ -20,13 +20,16 @@ const noHeadContentDev: Plugin = {
   name: "no-head-content-dev",
   enforce: "pre",
   resolveId(id, importer) {
-    if (id === "./HeadContent.dev.js" || id.endsWith("/HeadContent.dev.js")) {
-      // Strip Vite query params (e.g. ?v=xxx) from importer before computing dirname
+    const devFiles = ["HeadContent.dev.js", "Asset.dev.js"];
+    const matched = devFiles.find(
+      (f) => id === `./${f}` || id.endsWith(`/${f}`)
+    );
+    if (matched) {
       const importerPath = importer ? importer.split("?")[0] : "";
       const dir = importerPath
         ? path.dirname(importerPath)
         : path.resolve("node_modules/@tanstack/react-router/dist/esm");
-      return path.join(dir, "HeadContent.js");
+      return path.join(dir, matched.replace(".dev.js", ".js"));
     }
   },
 };

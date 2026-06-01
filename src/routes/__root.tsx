@@ -68,7 +68,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
   resetServerLanguage();
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <head>
+      <head suppressHydrationWarning>
         <HeadContent />
       </head>
       <body suppressHydrationWarning>
